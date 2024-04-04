@@ -38,7 +38,7 @@ cd Meteo-JS
 
 ## Configuration
 
-Avant d'utiliser Meteo-JS, vous devez obtenir une clé API gratuite auprès d'VisualCrossing en vous inscrivant sur leur site web. Une fois que vous avez obtenu votre clé API, remplacez la valeur de la variable `apiKey` dans le fichier `script.js` par votre propre clé API.
+Avant d'utiliser Meteo-JS, vous devez obtenir une clé API gratuite auprès d'VisualCrossing en vous inscrivant sur leur site web. Une fois que vous avez obtenu votre clé API, remplacez la valeur de la variable `apiKey` dans le fichier `index.html` par votre propre clé API.
 
 ## Contribution
 
