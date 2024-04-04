@@ -2,14 +2,17 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Météo de Paris </title>
+        <title> Application Météo </title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="carte">
             <div class="recherche">
-                <input type="text" placeholder="Entrez le nom d'une ville" spellcheck="false">
+                <input type="text" placeholder="Entrez le nom d'une ville, le pays" spellcheck="false">
                 <button><img src="images/search.png"></button>
+            </div>
+            <div class="recherche-erreur" hidden>
+                <h1>Erreur la ville que vous chercher est inconnue</p>
             </div>
             <div class="meteo">
                 <img src="" class="meteo-icon">
@@ -37,6 +40,7 @@
             // Pour obtenir la clé il faut s'incrire sur le site https://www.visualcrossing.com/
             // Aller sur compte et copier-coller la clé
             // Mettre la clé d'API ici
+            // Mettre la clé d'API ici
             const apiKey ="";
             const apiUrl="https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
             
@@ -45,7 +49,8 @@
             const meteoIcon = document.querySelector(".meteo-icon")
 
             async function checkMeteo(ville){
-                const response = await fetch(apiUrl + ville + '?unitGroup=metric' +'&key='+apiKey);
+                const response = await fetch(apiUrl + ville + '?unitGroup=metric' +'&key='+apiKey)
+                if(response.ok){
                 let data = await response.json();
                 document.querySelector(".ville").innerHTML = data.resolvedAddress.split(",")[0];
                 document.querySelector(".humidite").innerHTML = data.currentConditions.humidity + " % "
@@ -77,13 +82,17 @@
                     break;    
                     case "clear-night":
                         meteoIcon.src = "images/moon.png";
-                    break;    
+                    break;  
+                }
+                  document.querySelector(".recherche-erreur").setAttribute("hidden","hidden")
                       
+                }else{
+                    document.querySelector(".recherche-erreur").removeAttribute("hidden")
                 }
 
 
             }
-            checkMeteo("Gulli");
+            checkMeteo("Paris");
 
             buttonRecherche.addEventListener("click",()=>{
                 checkMeteo(txtRecherche.value)

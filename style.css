@@ -24,6 +24,11 @@ body{
     align-items: center;
     justify-content: space-between;
 }
+.recherche-erreur h1{
+    margin: 10px auto 0 ;
+    background-color: red;
+    
+}
 .recherche input{
     border: 0;
     outline: 0;
