@@ -33,6 +33,8 @@ git clone https://github.com/KhalifaBa/Meteo-JS.git
 cd Meteo-JS
 ```
 3. Ouvrez le fichier `index.html` dans votre navigateur web préféré.
+4. S'inscrire sur le site https://www.visualcrossing.com/ pour obtenir la clé API
+5. Mettre la clé dans la balise script de `index.html`
 
 ## Configuration
 
