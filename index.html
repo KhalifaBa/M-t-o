@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Météo de Paris </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="carte">
+            <div class="recherche">
+                <input type="text" placeholder="Entrez le nom d'une ville" spellcheck="false">
+                <button><img src="images/search.png"></button>
+            </div>
+            <div class="meteo">
+                <img src="" class="meteo-icon">
+                <h1 class="temp"></h1>
+                <h2 class="ville"></h2>
+            </div>
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidite"></p>
+                        <p>Humidité</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="vent"></p>
+                        <p>Vitesse du vent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const apiKey ="4ZUC8Y3PCBKHQBWCR7B385QUR";
+            const apiUrl="https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
+            
+            const buttonRecherche = document.querySelector(".recherche button")
+            const txtRecherche = document.querySelector(".recherche input")
+            const meteoIcon = document.querySelector(".meteo-icon")
+
+            async function checkMeteo(ville){
+                const response = await fetch(apiUrl + ville + '?unitGroup=metric' +'&key='+apiKey);
+                let data = await response.json();
+                document.querySelector(".ville").innerHTML = data.resolvedAddress.split(",")[0];
+                document.querySelector(".humidite").innerHTML = data.currentConditions.humidity + " % "
+                document.querySelector(".temp").innerHTML = Math.round(data.currentConditions.temp) + "°C"
+                document.querySelector(".vent").innerHTML = data.currentConditions.windspeed + " km/h"
+                console.log(data);
+
+                switch(data.currentConditions.icon){
+                    case "partly-cloudy-day":
+                        meteoIcon.src = "images/clouds.png";
+                    break;
+                    case "rain":
+                        meteoIcon.src = "images/rain.png";
+                    break;    
+                    case "fog":
+                        meteoIcon.src = "images/fog.png";
+                    break;    
+                    case "snow":
+                        meteoIcon.src = "images/snow.png";
+                    break;     
+                    case "cloudy":
+                        meteoIcon.src = "images/cloudy.png";
+                    break;    
+                    case "partly-cloudy-night":
+                        meteoIcon.src = "images/partly-cloudy-night.png";
+                    break;    
+                    case "clear-day":
+                        meteoIcon.src = "images/clear.png";
+                    break;    
+                    case "clear-night":
+                        meteoIcon.src = "images/moon.png";
+                    break;    
+                      
+                }
+
+
+            }
+            checkMeteo("Gulli");
+
+            buttonRecherche.addEventListener("click",()=>{
+                checkMeteo(txtRecherche.value)
+                txtRecherche.value = ""
+            })
+        </script>
+    </body>
+</html>
